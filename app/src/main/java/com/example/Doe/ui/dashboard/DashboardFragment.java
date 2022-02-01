@@ -21,7 +21,6 @@ import com.example.Doe.adapter.AdapterItem;
 import com.example.Doe.constantes.Constantes;
 import com.example.Doe.R;
 import com.example.Doe.models.Doacao;
-import com.example.Doe.models.RepositorioDoacaoes;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -121,7 +120,6 @@ public class DashboardFragment extends Fragment {
         telaAddCaso.putExtra("descricao", doacoesList.get(selected).getDescricao());
         telaAddCaso.putExtra("etiqueta", doacoesList.get(selected).getEtiqueta());
         telaAddCaso.putExtra("idDoacoes", doacoesList.get(selected).getIdDoacao());
-        telaAddCaso.putExtra("data", doacoesList.get(selected).getData());
         telaAddCaso.putExtra("longitude", doacoesList.get(selected).getLongitude());
         telaAddCaso.putExtra("latitude", doacoesList.get(selected).getLatitude());
 
@@ -180,9 +178,9 @@ public class DashboardFragment extends Fragment {
             String etiqueta = data.getExtras().get("etiqueta").toString();
             String longitude = data.getExtras().get("longitude").toString();
             String latitude = data.getExtras().get("latitude").toString();
-            String date = data.getExtras().get("data").toString();
 
-            Doacao doacoes = new Doacao(titulo, descricao, etiqueta, longitude, latitude, date, mAuth.getUid());
+
+            Doacao doacoes = new Doacao(titulo, descricao, etiqueta, longitude, latitude, mAuth.getUid());
 
             doacoesList.add(doacoes);
 

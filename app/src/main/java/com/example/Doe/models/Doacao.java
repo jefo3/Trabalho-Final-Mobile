@@ -7,19 +7,17 @@ public class Doacao {
     private String etiqueta;
     private String longitude;
     private String latitude;
-    private String data;
     private String idUsuario;
     private String idDoacao;
 
     public Doacao(){}
 
-    public Doacao(String titulo, String descricao, String etiqueta, String longitude, String latitude, String data, String idUsuario) {
+    public Doacao(String titulo, String descricao, String etiqueta, String longitude, String latitude, String idUsuario) {
         this.titulo = titulo;
         this.descricao = descricao;
         this.etiqueta = etiqueta;
         this.longitude = longitude;
         this.latitude = latitude;
-        this.data = data;
         this.idUsuario = idUsuario;
     }
 
@@ -51,10 +49,6 @@ public class Doacao {
 
     public void setLatitude(String latitude) { this.latitude = latitude; }
 
-    public String getData() { return data; }
-
-    public void setData(String data) { this.data = data; }
-
     public void setIdUsuario(String idUsuario) { this.idUsuario = idUsuario; }
 
     public String getIdUsuario(){
@@ -77,7 +71,6 @@ public class Doacao {
                 ", etiqueta='" + etiqueta + '\'' +
                 ", longitude='" + longitude + '\'' +
                 ", latitude='" + latitude + '\'' +
-                ", data='" + data + '\'' +
                 ", idUsuario='" + idUsuario + '\'' +
                 ", idDoacao='" + idDoacao + '\'' +
                 '}';
