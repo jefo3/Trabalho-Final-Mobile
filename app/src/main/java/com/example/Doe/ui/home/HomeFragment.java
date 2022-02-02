@@ -72,6 +72,9 @@ public class HomeFragment extends Fragment {
                 telaDathe.putExtra("descricao", listaDoacoes.get(selected).getDescricao());
                 telaDathe.putExtra("etiqueta", listaDoacoes.get(selected).getEtiqueta());
                 telaDathe.putExtra("id", listaDoacoes.get(selected).getIdDoacao());
+                telaDathe.putExtra("latitude", listaDoacoes.get(selected).getLatitude());
+                telaDathe.putExtra("longitude", listaDoacoes.get(selected).getLongitude());
+                telaDathe.putExtra("idUsuario", listaDoacoes.get(selected).getIdUsuario());
 
                 startActivity(telaDathe);
             }

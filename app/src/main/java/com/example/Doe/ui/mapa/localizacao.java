@@ -15,7 +15,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class localizacao extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-
+    String latitude;
+    String longitude;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +25,8 @@ public class localizacao extends FragmentActivity implements OnMapReadyCallback 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
     }
 
     /**
@@ -37,11 +40,23 @@ public class localizacao extends FragmentActivity implements OnMapReadyCallback 
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
+
+        if(getIntent().getExtras() != null) {
+
+            latitude = getIntent().getExtras().get("latitude").toString();
+            longitude = getIntent().getExtras().get("longitude").toString();
+
+
+        }
+
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng quixada = new LatLng( -4.97813, -39.0188);
-        mMap.addMarker(new MarkerOptions().position(quixada).title("Marker in quixada"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(quixada));
+        Double lat = Double.parseDouble(latitude);
+        Double lon = Double.parseDouble(longitude);
+
+        LatLng local = new LatLng( lat, lon );
+        mMap.addMarker(new MarkerOptions().position(local).title("Local do Doador"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(local, 10));
     }
 }

@@ -16,7 +16,9 @@ public class TelaDetalhada extends AppCompatActivity {
     TextView edTextTitulo;
     TextView edTextDescricao;
     TextView edTextEtiqueta;
-
+    String latitude;
+    String longitude;
+    String idUsuario;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +33,9 @@ public class TelaDetalhada extends AppCompatActivity {
             String titulo = getIntent().getExtras().get("titulo").toString();
             String descricao = getIntent().getExtras().get("descricao").toString();
             String etiqueta = getIntent().getExtras().get("etiqueta").toString();
-
+            latitude = getIntent().getExtras().get("latitude").toString();
+            longitude = getIntent().getExtras().get("longitude").toString();
+            idUsuario = getIntent().getExtras().get("idUsuario").toString();
 
             edTextTitulo.setText(titulo);
             edTextDescricao.setText(descricao);
@@ -56,6 +60,10 @@ public class TelaDetalhada extends AppCompatActivity {
 
     public void mapa(View view){
         Intent mapa = new Intent(this, localizacao.class);
+
+        mapa.putExtra("latitude", latitude);
+        mapa.putExtra("longitude", longitude);
+
         startActivity(mapa);
     }
 }
