@@ -1,5 +1,6 @@
 package com.example.Doe.ui.home;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ComponentName;
@@ -8,9 +9,21 @@ import android.os.Bundle;
 import android.telephony.PhoneNumberUtils;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.Doe.R;
+import com.example.Doe.models.Doacao;
+import com.example.Doe.models.Usuario;
 import com.example.Doe.ui.mapa.localizacao;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class TelaDetalhada extends AppCompatActivity {
     TextView edTextTitulo;
@@ -19,6 +32,11 @@ public class TelaDetalhada extends AppCompatActivity {
     String latitude;
     String longitude;
     String idUsuario;
+
+    FirebaseAuth mAuth;
+    FirebaseFirestore db;
+    String numero;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +45,9 @@ public class TelaDetalhada extends AppCompatActivity {
         edTextTitulo = findViewById(R.id.titulo);
         edTextDescricao = findViewById(R.id.descricao);
         edTextEtiqueta = findViewById(R.id.etiqueta);
+
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         if(getIntent().getExtras() != null) {
 
@@ -45,10 +66,41 @@ public class TelaDetalhada extends AppCompatActivity {
 
         }
 
+        numeroCelular();
+
+    }
+
+    public void numeroCelular(){
+
+        db.collection("usuarios")
+                .whereEqualTo("id",idUsuario)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+
+                            Usuario usuario = document.toObject(Usuario.class);
+
+                            numero = usuario.getTelefone();
+
+                        }
+
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                    }
+                });
+
     }
 
     public void ajudar(View view){
-        String numero = "8681638647";
+
 
         Intent wpp = new Intent("android.intent.action.MAIN");
         wpp.setComponent(new ComponentName("com.whatsapp", "com.whatsapp.Conversation"));
