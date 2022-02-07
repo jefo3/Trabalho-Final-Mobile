@@ -1,2 +1,2 @@
-# Ajude
-Trabalhos final da cadeira mobile
+# Projeto Doe
+Projeto para a disciplina Mobile
